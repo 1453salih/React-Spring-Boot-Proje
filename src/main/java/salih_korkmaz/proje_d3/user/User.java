@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import salih_korkmaz.proje_d3.user.validation.UniqueEmail;
 
 @Entity
 @Table(name="users",uniqueConstraints = @UniqueConstraint(columnNames = {"email"}))
@@ -21,6 +22,7 @@ public class User {
 
     @Email
     @NotBlank
+    @UniqueEmail
     String email;
 
     @Size(min=8, max=255)

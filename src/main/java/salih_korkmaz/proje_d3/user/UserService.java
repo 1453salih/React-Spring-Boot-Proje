@@ -19,7 +19,7 @@ public class UserService {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepository.save(user);
         }catch (DataIntegrityViolationException ex) {
-
+            throw new NotUniqueEmailException();
         }
 
     }

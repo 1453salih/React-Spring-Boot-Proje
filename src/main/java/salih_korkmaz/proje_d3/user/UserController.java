@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import salih_korkmaz.proje_d3.error.ApiError;
 import salih_korkmaz.proje_d3.shared.GenericMessage;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -26,22 +28,27 @@ public class UserController {
         return new GenericMessage("User is created");
     }
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     ResponseEntity<ApiError> handleMethodArgumentNotValidException(MethodArgumentNotValidException excepiton) {
         ApiError apiError = new ApiError();
         apiError.setPath("/api/v1/users");
         apiError.setMessage("Validation error");
         apiError.setStatus(400);
-//        Map<String,String> validationErrors = new HashMap<>();
-
-//        for(var fieldError : excepiton.getBindingResult().getFieldErrors() ){
-//            validationErrors.put(fieldError.getField(),fieldError.getDefaultMessage());
-//        }
         var validationErrors = excepiton.getBindingResult().getFieldErrors().stream().collect(Collectors.toMap(FieldError::getField,FieldError::getDefaultMessage,(existing,replacing)->existing));
         apiError.setValidationErrors(validationErrors);
         return  ResponseEntity.badRequest().body(apiError);
     }
 
+    @ExceptionHandler(NotUniqueEmailException.class)
+    ResponseEntity<ApiError> NotUniqueEmailEx(NotUniqueEmailException exception) {
+        ApiError apiError = new ApiError();
+        apiError.setPath("/api/v1/users");
+        apiError.setMessage("Validation error");
+        apiError.setStatus(400);
+        Map<String,String> validationErrors = new HashMap<>();
+        validationErrors.put("email","E-mail in use");
+        apiError.setValidationErrors(validationErrors);
+        return  ResponseEntity.badRequest().body(apiError);
+    }
 
 }
 
