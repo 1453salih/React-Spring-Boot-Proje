@@ -60,7 +60,7 @@ export function SignUp() {
         if (password && password !== passwordRepeat) {
             return 'Password mismatch';
         }
-        return 'Password mismatch Error';
+        return '';
     },[password,passwordRepeat])
     return (
         <div className="container mt-5">
