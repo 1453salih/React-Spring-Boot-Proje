@@ -16,6 +16,7 @@ import jakarta.validation.Valid;
 import salih_korkmaz.proje_d3.error.ApiError;
 import salih_korkmaz.proje_d3.shared.GenericMessage;
 import salih_korkmaz.proje_d3.shared.Messages;
+import salih_korkmaz.proje_d3.user.dto.UserCreate;
 import salih_korkmaz.proje_d3.user.exception.NotUniqueEmailException;
 
 
@@ -27,8 +28,8 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/api/v1/users")
-    GenericMessage createUser(@Valid @RequestBody User user){
-        userService.save(user);
+    GenericMessage createUser(@Valid @RequestBody UserCreate user){
+        userService.save(user.toUser());
         String message = Messages.getMessageForLocale("salih_korkmaz.create.user.success.message", LocaleContextHolder.getLocale());
         return new GenericMessage(message);
     }
