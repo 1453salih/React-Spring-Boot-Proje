@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.validation.Valid;
+import jakarta.validation.Valid; 
 import salih_korkmaz.proje_d3.error.ApiError;
 import salih_korkmaz.proje_d3.shared.GenericMessage;
 import salih_korkmaz.proje_d3.shared.Messages;
