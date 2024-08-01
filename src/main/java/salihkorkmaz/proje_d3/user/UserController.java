@@ -1,4 +1,4 @@
-package salih_korkmaz.proje_d3.user;
+package salihkorkmaz.proje_d3.user;
 
 import java.util.stream.Collectors;
 
@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid; 
-import salih_korkmaz.proje_d3.error.ApiError;
-import salih_korkmaz.proje_d3.shared.GenericMessage;
-import salih_korkmaz.proje_d3.shared.Messages;
-import salih_korkmaz.proje_d3.user.dto.UserCreate;
-import salih_korkmaz.proje_d3.user.exception.ActivationNotificationExcepiton;
-import salih_korkmaz.proje_d3.user.exception.NotUniqueEmailException;
+import salihkorkmaz.proje_d3.error.ApiError;
+import salihkorkmaz.proje_d3.shared.GenericMessage;
+import salihkorkmaz.proje_d3.shared.Messages;
+import salihkorkmaz.proje_d3.user.dto.UserCreate;
+import salihkorkmaz.proje_d3.user.exception.ActivationNotificationExcepiton;
+import salihkorkmaz.proje_d3.user.exception.NotUniqueEmailException;
 
 
 
@@ -31,7 +31,7 @@ public class UserController {
     @PostMapping("/api/v1/users")
     GenericMessage createUser(@Valid @RequestBody UserCreate user){
         userService.save(user.toUser());
-        String message = Messages.getMessageForLocale("salih_korkmaz.create.user.success.message", LocaleContextHolder.getLocale());
+        String message = Messages.getMessageForLocale("salihkorkmaz.create.user.success.message", LocaleContextHolder.getLocale());
         return new GenericMessage(message);
     }
 
@@ -40,7 +40,7 @@ public class UserController {
     ResponseEntity<ApiError> handleMethodArgNotValidEx(MethodArgumentNotValidException exception){
         ApiError apiError = new ApiError();
         apiError.setPath("/api/v1/users");
-        String message = Messages.getMessageForLocale("salih_korkmaz.error.validation", LocaleContextHolder.getLocale());
+        String message = Messages.getMessageForLocale("salihkorkmaz.error.validation", LocaleContextHolder.getLocale());
         apiError.setMessage(message);
         apiError.setStatus(400);
         var validationErrors = exception.getBindingResult().getFieldErrors().stream().collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage, (existing, replacing) -> existing));

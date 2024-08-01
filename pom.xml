@@ -8,7 +8,7 @@
         <version>3.3.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>salih_korkmaz</groupId>
+    <groupId>salihkorkmaz</groupId>
     <artifactId>proje_d3</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>proje_d3</name>

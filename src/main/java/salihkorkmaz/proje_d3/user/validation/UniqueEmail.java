@@ -1,4 +1,4 @@
-package salih_korkmaz.proje_d3.user.validation;
+package salihkorkmaz.proje_d3.user.validation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -13,7 +13,7 @@ import jakarta.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UniqueEmail {
 
-    String message() default "{salih_korkmaz.constraint.email.notunique}";
+    String message() default "{salihkorkmaz.constraint.email.notunique}";
 
     Class<?>[] groups() default { };
 

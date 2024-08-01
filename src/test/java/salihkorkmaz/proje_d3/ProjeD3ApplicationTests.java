@@ -1,4 +1,4 @@
-package salih_korkmaz.proje_d3;
+package salihkorkmaz.proje_d3;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

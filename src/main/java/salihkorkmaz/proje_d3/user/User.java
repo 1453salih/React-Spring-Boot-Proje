@@ -1,4 +1,4 @@
-package salih_korkmaz.proje_d3.user;
+package salihkorkmaz.proje_d3.user;
 
 
 import jakarta.persistence.*;

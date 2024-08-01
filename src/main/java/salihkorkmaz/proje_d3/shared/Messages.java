@@ -1,4 +1,4 @@
-package salih_korkmaz.proje_d3.shared;
+package salihkorkmaz.proje_d3.shared;
 
 import java.util.Locale;
 import java.util.ResourceBundle;

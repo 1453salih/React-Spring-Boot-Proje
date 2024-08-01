@@ -1,4 +1,4 @@
-package salih_korkmaz.proje_d3.user;
+package salihkorkmaz.proje_d3.user;
 
 
 import jakarta.transaction.Transactional;
@@ -9,9 +9,9 @@ import org.springframework.mail.MailException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import salih_korkmaz.proje_d3.email.EmailService;
-import salih_korkmaz.proje_d3.user.exception.ActivationNotificationExcepiton;
-import salih_korkmaz.proje_d3.user.exception.NotUniqueEmailException;
+import salihkorkmaz.proje_d3.email.EmailService;
+import salihkorkmaz.proje_d3.user.exception.ActivationNotificationExcepiton;
+import salihkorkmaz.proje_d3.user.exception.NotUniqueEmailException;
 
 import java.util.UUID;
 

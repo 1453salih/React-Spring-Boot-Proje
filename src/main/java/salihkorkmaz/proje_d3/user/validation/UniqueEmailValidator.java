@@ -1,11 +1,11 @@
-package salih_korkmaz.proje_d3.user.validation;
+package salihkorkmaz.proje_d3.user.validation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import salih_korkmaz.proje_d3.user.User;
-import salih_korkmaz.proje_d3.user.UserRepository;
+import salihkorkmaz.proje_d3.user.User;
+import salihkorkmaz.proje_d3.user.UserRepository;
 
 public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, String> {
 

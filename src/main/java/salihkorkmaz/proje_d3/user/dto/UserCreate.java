@@ -1,14 +1,13 @@
-package salih_korkmaz.proje_d3.user.dto;
+package salihkorkmaz.proje_d3.user.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import salih_korkmaz.proje_d3.user.User;
-import salih_korkmaz.proje_d3.user.validation.UniqueEmail;
+import salihkorkmaz.proje_d3.user.User;
 
 public record UserCreate(
-        @NotBlank(message = "{salih_korkmaz.constraint.username.notblank}")
+        @NotBlank(message = "{salihkorkmaz.constraint.username.notblank}")
         @Size(min = 4, max = 255)
         String username,
 
@@ -18,7 +17,7 @@ public record UserCreate(
         String email,
 
         @Size(min = 8, max = 255)
-        @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message = "{salih_korkmaz.constraint.password.pattern}")
+        @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message = "{salihkorkmaz.constraint.password.pattern}")
         String password
 ) {
     public User toUser() {
