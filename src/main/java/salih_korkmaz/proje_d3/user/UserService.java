@@ -6,6 +6,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import salih_korkmaz.proje_d3.user.exception.NotUniqueEmailException;
+
+
 @Service
 public class UserService {
 
@@ -14,13 +17,13 @@ public class UserService {
 
     PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public void save(User user) {
+    public void save(User user){
         try {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepository.save(user);
-        }catch (DataIntegrityViolationException ex) {
+        } catch (DataIntegrityViolationException ex){
             throw new NotUniqueEmailException();
         }
-
     }
+
 }
