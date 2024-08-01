@@ -1,9 +1,14 @@
 package salih_korkmaz.proje_d3.error;
 
+
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
+@JsonInclude(value = Include.NON_NULL)//spring errorları json çevirirken nullarıda çeviriyordu boş (ValidationsError:{}) jsonu kaldırmak için eğer boşsa gösterme dedik.
 public class ApiError {
 
     private int status;
@@ -14,7 +19,7 @@ public class ApiError {
 
     private long timestamp = new Date().getTime();
 
-    private Map<String,String> validationErrors = new HashMap<>();
+    private Map<String,String> validationErrors = null;
 
     public int getStatus() {
         return status;

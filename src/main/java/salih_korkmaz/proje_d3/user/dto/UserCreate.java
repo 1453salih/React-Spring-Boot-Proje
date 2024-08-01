@@ -12,21 +12,21 @@ public record UserCreate(
         @Size(min = 4, max = 255)
         String username,
 
-                @NotBlank
-                @Email
-                @UniqueEmail
-                        String email,
+        @NotBlank
+        @Email
+//      @UniqueEmail
+        String email,
 
-                @Size(min = 8, max = 255)
-                @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message = "{salih_korkmaz.constraint.password.pattern}")
-                        String password
+        @Size(min = 8, max = 255)
+        @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message = "{salih_korkmaz.constraint.password.pattern}")
+        String password
 ) {
-        public User toUser(){
-                User user = new User();
-                user.setEmail(email);
-                user.setUsername(username);
-                user.setPassword(password);
-                return user;
+    public User toUser() {
+        User user = new User();
+        user.setEmail(email);
+        user.setUsername(username);
+        user.setPassword(password);
+        return user;
 
-        }
+    }
 }

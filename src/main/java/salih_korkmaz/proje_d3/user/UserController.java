@@ -17,6 +17,7 @@ import salih_korkmaz.proje_d3.error.ApiError;
 import salih_korkmaz.proje_d3.shared.GenericMessage;
 import salih_korkmaz.proje_d3.shared.Messages;
 import salih_korkmaz.proje_d3.user.dto.UserCreate;
+import salih_korkmaz.proje_d3.user.exception.ActivationNotificationExcepiton;
 import salih_korkmaz.proje_d3.user.exception.NotUniqueEmailException;
 
 
@@ -54,10 +55,17 @@ public class UserController {
         apiError.setMessage(exception.getMessage());
         apiError.setStatus(400);
         apiError.setValidationErrors(exception.getValidationErrors());
-        return ResponseEntity.badRequest().body(apiError);
+        return ResponseEntity.status(400).body(apiError);
     }
 
-
+    @ExceptionHandler(ActivationNotificationExcepiton.class)
+    ResponseEntity<ApiError> handleActivationNotificationExcepiton(ActivationNotificationExcepiton exception){
+        ApiError apiError = new ApiError();
+        apiError.setPath("/api/v1/users");
+        apiError.setMessage(exception.getMessage());
+        apiError.setStatus(502);
+        return ResponseEntity.status(502).body(apiError);
+    }
 
 }
 
