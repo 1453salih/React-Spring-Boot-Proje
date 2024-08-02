@@ -6,7 +6,7 @@ import {Activation} from "../pages/Activation/index.jsx";
 
 export default createBrowserRouter([
     {
-        path:"/",
+        path:"/",//ss
         Component:App,
         children:[
             {
