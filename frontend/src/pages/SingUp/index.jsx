@@ -1,9 +1,7 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import {singUp} from "./api.js";
-import {Input} from "./components/Input.jsx";
+import {Input} from "../SingUp/components/Input.jsx";
 import {useTranslation} from "react-i18next";
-import {LanguageSelector} from "../shared/components/LanguageSelector.jsx";
-
 
 export function SignUp() {
 
@@ -119,7 +117,6 @@ export function SignUp() {
                         </div>
                     </div>
                 </form>
-                <LanguageSelector/>
             </div>
         </div>)
 }
