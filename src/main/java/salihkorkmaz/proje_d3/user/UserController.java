@@ -7,10 +7,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid; 
 import salihkorkmaz.proje_d3.error.ApiError;
@@ -18,6 +15,7 @@ import salihkorkmaz.proje_d3.shared.GenericMessage;
 import salihkorkmaz.proje_d3.shared.Messages;
 import salihkorkmaz.proje_d3.user.dto.UserCreate;
 import salihkorkmaz.proje_d3.user.exception.ActivationNotificationExcepiton;
+import salihkorkmaz.proje_d3.user.exception.InvalidTokenException;
 import salihkorkmaz.proje_d3.user.exception.NotUniqueEmailException;
 
 
@@ -32,6 +30,12 @@ public class UserController {
     GenericMessage createUser(@Valid @RequestBody UserCreate user){
         userService.save(user.toUser());
         String message = Messages.getMessageForLocale("salihkorkmaz.create.user.success.message", LocaleContextHolder.getLocale());
+        return new GenericMessage(message);
+    }
+    @PatchMapping("/api/v1/users/{token}/active")
+    GenericMessage activateUser(@PathVariable String token){
+        userService.activateUser(token);
+        String message = Messages.getMessageForLocale("salihkorkmaz.activate.user.success.message", LocaleContextHolder.getLocale());
         return new GenericMessage(message);
     }
 
@@ -65,6 +69,14 @@ public class UserController {
         apiError.setMessage(exception.getMessage());
         apiError.setStatus(502);
         return ResponseEntity.status(502).body(apiError);
+    }
+    @ExceptionHandler(InvalidTokenException.class)
+    ResponseEntity<ApiError> handleInvalidTokenException(InvalidTokenException exception){
+        ApiError apiError = new ApiError();
+        apiError.setPath("/api/v1/users");
+        apiError.setMessage(exception.getMessage());
+        apiError.setStatus(400);
+        return ResponseEntity.status(400).body(apiError);
     }
 
 }

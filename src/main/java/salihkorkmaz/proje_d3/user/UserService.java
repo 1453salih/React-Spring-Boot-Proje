@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import salihkorkmaz.proje_d3.email.EmailService;
 import salihkorkmaz.proje_d3.user.exception.ActivationNotificationExcepiton;
+import salihkorkmaz.proje_d3.user.exception.InvalidTokenException;
 import salihkorkmaz.proje_d3.user.exception.NotUniqueEmailException;
 
 import java.util.UUID;
@@ -43,4 +44,13 @@ public class UserService {
     }
 
 
+    public void activateUser(String token) {
+        User inDB = userRepository.findByActivationToken(token);
+        if (inDB == null) {
+            throw new InvalidTokenException();
+        }
+        inDB.setActive(true);
+        inDB.setActivationToken(null);
+        userRepository.save(inDB);
+    }
 }
