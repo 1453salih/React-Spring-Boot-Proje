@@ -6,7 +6,7 @@ import {Spinner} from "../../shared/components/Spinner.jsx";
 
 export function Activation() {
     const {token} = useParams();
-    const [apiProgress, setApiProgress] = useState(true);
+    const [apiProgress, setApiProgress] = useState();
     const [successMessage, setSuccessMessage] = useState();
     const [errorMessage, setErrorMessage] = useState();
     useEffect(() => {
@@ -23,7 +23,7 @@ export function Activation() {
             }
         }
 
-        // activate();
+        activate();
     }, []);
 
     return (<>
