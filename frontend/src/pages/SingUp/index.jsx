@@ -2,6 +2,8 @@ import React, {useEffect, useMemo, useState} from 'react';
 import {singUp} from "./api.js";
 import {Input} from "../SingUp/components/Input.jsx";
 import {useTranslation} from "react-i18next";
+import {Alert} from "../../shared/components/Alert.jsx";
+import {Spinner} from "../../shared/components/Spinner.jsx";
 
 export function SignUp() {
 
@@ -13,7 +15,7 @@ export function SignUp() {
     const [successMessage, setSuccessMessage] = useState();
     const [errors, setErrors] = useState({});
     const [generalError, setGeneralError] = useState();
-    const { t } = useTranslation()
+    const {t} = useTranslation()
 
     //* İnput alanında herhangi bir değişiklik olduğunda hata mesajını sıfırlar
     useEffect(() => {
@@ -48,9 +50,9 @@ export function SignUp() {
             setSuccessMessage(response.data.message)
         } catch (axiosError) {
             if (axiosError.response?.data) { //* Yanıt aldıysak ve data varsa
-                if (axiosError.response.data.status === 400){              //* 400 cevanı aldıysak ValidationsError
+                if (axiosError.response.data.status === 400) {              //* 400 cevanı aldıysak ValidationsError
                     setErrors(axiosError.response.data.validationErrors);
-                }else{
+                } else {
                     setGeneralError(axiosError.response.data.message);
                 }
             } else {
@@ -65,7 +67,7 @@ export function SignUp() {
             return t('passwordMissmatch');
         }
         return '';
-    },[password,passwordRepeat])
+    }, [password, passwordRepeat])
     return (
         <div className="container mt-5">
             <div className="col-lg-6 offset-lg-3 col-sm-8 offset-sm-2">
@@ -78,40 +80,23 @@ export function SignUp() {
                                onChange={(event) => setUsername(event.target.value)}/>
                         <Input id="email" label={t('email')} error={errors.email}
                                onChange={(event) => setEmail(event.target.value)}/>
-                        {/*<div className="mb-3">*/}
-                        {/*    <label htmlFor="username" className="form-label">Username</label>*/}
-                        {/*    <input*/}
-                        {/*        id="username"*/}
-                        {/*        className={errors.username ? "form-control is-invalid" : "form-control"}*/}
-                        {/*        type="text"*/}
-                        {/*        placeholder="Username"*/}
-                        {/*        onChange={(event) => setUsername(event.target.value)}/>*/}
-                        {/*    <div className="invalid-feedback">*/}
-                        {/*        {errors.username}*/}
-                        {/*    </div>*/}
-                        {/*</div>*/}
-                        {/*<div className="mb-3">*/}
-                        {/*    <label htmlFor="email" className="form-label">E-mail</label>*/}
-                        {/*    <input id="email" className="form-control" type="email" placeholder="E-mail"*/}
-                        {/*           onChange={(event) => setEmail(event.target.value)}/>*/}
-                        {/*</div>*/}
                         <Input id="password" label={t('password')} error={errors.password}
                                onChange={(event) => setPassword(event.target.value)} type="password"/>
                         <Input id="passwordRepeat" label={t('passwordRepeat')} error={passwordRepeatError}
                                onChange={(event) => setPasswordRepeat(event.target.value)} type="password"/>
 
                         {successMessage && (
-                            <div className="alert alert-success">{successMessage}</div>
+                            <Alert>{successMessage}</Alert>
                         )}
                         {generalError && (
-                            <div className="alert alert-danger">{generalError}</div>
+                            <Alert styleType="danger">{generalError}</Alert>
                         )}
                         <div className="text-center">
                             <button className="btn btn-primary"
                                     disabled={!password || password !== passwordRepeat}>
-                                {apiProgress &&
-                                    <span className="spinner-border spinner-border-sm"
-                                          aria-hidden="true"></span>}
+                                {apiProgress && (
+                                    <Spinner sm/>
+                                )}
                                 {t('signUp')}
                             </button>
                         </div>
