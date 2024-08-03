@@ -1,8 +1,8 @@
 import {useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {activateUser} from "./api.js";
-import {Alert} from "../../shared/components/Alert.jsx";
-import {Spinner} from "../../shared/components/Spinner.jsx";
+import {Alert} from "@/shared/components/Alert.jsx";
+import {Spinner} from "@/shared/components/Spinner.jsx";
 
 export function Activation() {
     const {token} = useParams();

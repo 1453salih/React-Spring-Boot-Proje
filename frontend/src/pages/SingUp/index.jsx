@@ -2,8 +2,8 @@ import React, {useEffect, useMemo, useState} from 'react';
 import {singUp} from "./api.js";
 import {Input} from "../SingUp/components/Input.jsx";
 import {useTranslation} from "react-i18next";
-import {Alert} from "../../shared/components/Alert.jsx";
-import {Spinner} from "../../shared/components/Spinner.jsx";
+import {Alert} from "@/shared/components/Alert.jsx";
+import {Spinner} from "@/shared/components/Spinner.jsx";
 
 export function SignUp() {
 
