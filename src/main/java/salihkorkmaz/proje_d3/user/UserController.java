@@ -1,5 +1,6 @@
 package salihkorkmaz.proje_d3.user;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,10 @@ public class UserController {
         return new GenericMessage(message);
     }
 
+    @GetMapping("/api/v1/users")
+    List<User> getAllUsers(){
+        return userService.getUsers();
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     ResponseEntity<ApiError> handleMethodArgNotValidEx(MethodArgumentNotValidException exception){

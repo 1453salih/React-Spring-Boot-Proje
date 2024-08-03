@@ -14,6 +14,7 @@ import salihkorkmaz.proje_d3.user.exception.ActivationNotificationExcepiton;
 import salihkorkmaz.proje_d3.user.exception.InvalidTokenException;
 import salihkorkmaz.proje_d3.user.exception.NotUniqueEmailException;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -53,4 +54,9 @@ public class UserService {
         inDB.setActivationToken(null);
         userRepository.save(inDB);
     }
+
+    public List<User> getUsers() {
+        return userRepository.findAll();
+    }
+
 }
