@@ -1,11 +1,12 @@
 package salihkorkmaz.proje_d3.user;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 
 @Entity
-@Table(name="users", uniqueConstraints = @UniqueConstraint(columnNames = {"email"}))
+@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = {"email"}))
 public class User {
 
     @Id
@@ -15,14 +16,26 @@ public class User {
 
     String username;
 
-
+    @JsonIgnore
     String email;
+
 
     String password;
 
     boolean active = false;
 
     String activationToken;
+
+    String image;
+
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public String getActivationToken() {
         return activationToken;

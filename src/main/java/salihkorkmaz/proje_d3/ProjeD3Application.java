@@ -25,7 +25,7 @@ public class ProjeD3Application {
     CommandLineRunner userCreator(UserRepository userRepository) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         return (args) -> {
-            for (var i = 1; i < 25; i++) {
+            for (var i = 1; i <= 25; i++) {
                 User user = new User();
                 user.setUsername("user" + i);
                 user.setEmail("user" + i + "@gmail.com");

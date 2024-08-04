@@ -4,6 +4,9 @@ package salihkorkmaz.proje_d3.user;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+
+import org.springframework.data.domain.Pageable;
 import org.springframework.mail.MailException;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,7 +17,7 @@ import salihkorkmaz.proje_d3.user.exception.ActivationNotificationExcepiton;
 import salihkorkmaz.proje_d3.user.exception.InvalidTokenException;
 import salihkorkmaz.proje_d3.user.exception.NotUniqueEmailException;
 
-import java.util.List;
+
 import java.util.UUID;
 
 
@@ -55,8 +58,8 @@ public class UserService {
         userRepository.save(inDB);
     }
 
-    public List<User> getUsers() {
-        return userRepository.findAll();
+    public Page<User> getUsers(Pageable page) {
+        return userRepository.findAll(page);
     }
 
 }

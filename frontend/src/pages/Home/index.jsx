@@ -1,3 +1,5 @@
+import {UserList} from "@/pages/Home/components/UserList.jsx";
+
 export function Home() {
-    return <div> <h1>Home Page</h1> </div>
+    return <UserList/>
 }

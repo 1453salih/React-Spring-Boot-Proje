@@ -1,10 +1,11 @@
 package salihkorkmaz.proje_d3.user;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -15,6 +16,7 @@ import salihkorkmaz.proje_d3.error.ApiError;
 import salihkorkmaz.proje_d3.shared.GenericMessage;
 import salihkorkmaz.proje_d3.shared.Messages;
 import salihkorkmaz.proje_d3.user.dto.UserCreate;
+import salihkorkmaz.proje_d3.user.dto.UserDTO;
 import salihkorkmaz.proje_d3.user.exception.ActivationNotificationExcepiton;
 import salihkorkmaz.proje_d3.user.exception.InvalidTokenException;
 import salihkorkmaz.proje_d3.user.exception.NotUniqueEmailException;
@@ -41,8 +43,8 @@ public class UserController {
     }
 
     @GetMapping("/api/v1/users")
-    List<User> getAllUsers(){
-        return userService.getUsers();
+    Page<UserDTO> getAllUsers(Pageable page){
+        return userService.getUsers(page).map(UserDTO::new);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

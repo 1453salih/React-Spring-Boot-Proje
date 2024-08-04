@@ -9,6 +9,8 @@ export function Activation() {
     const [apiProgress, setApiProgress] = useState();
     const [successMessage, setSuccessMessage] = useState();
     const [errorMessage, setErrorMessage] = useState();
+
+
     useEffect(() => {
         async function activate() {
             setApiProgress(true);
