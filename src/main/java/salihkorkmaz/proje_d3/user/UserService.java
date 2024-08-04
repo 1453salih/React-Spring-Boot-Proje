@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import salihkorkmaz.proje_d3.email.EmailService;
+import salihkorkmaz.proje_d3.user.dto.UserDTO;
 import salihkorkmaz.proje_d3.user.exception.ActivationNotificationExcepiton;
 import salihkorkmaz.proje_d3.user.exception.InvalidTokenException;
 import salihkorkmaz.proje_d3.user.exception.NotUniqueEmailException;
@@ -60,6 +61,10 @@ public class UserService {
 
     public Page<User> getUsers(Pageable page) {
         return userRepository.findAll(page);
+    }
+
+    public User getUser(long id) {
+        return userRepository.getReferenceById(id);
     }
 
 }
