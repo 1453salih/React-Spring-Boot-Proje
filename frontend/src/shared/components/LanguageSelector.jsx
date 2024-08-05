@@ -19,7 +19,7 @@ export function LanguageSelector(){
 
             <img
                 role="button"
-                src="https://flagcdn.com/24x18/us.png"
+                src="https://flagcdn.com/24x18/az.png"
                 width="24"
                 height="18"
                 alt="English"

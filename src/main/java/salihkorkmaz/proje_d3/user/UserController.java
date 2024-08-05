@@ -2,8 +2,6 @@ package salihkorkmaz.proje_d3.user;
 
 import java.util.stream.Collectors;
 
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -22,6 +20,7 @@ import salihkorkmaz.proje_d3.user.dto.UserCreate;
 import salihkorkmaz.proje_d3.user.dto.UserDTO;
 import salihkorkmaz.proje_d3.user.exception.ActivationNotificationExcepiton;
 import salihkorkmaz.proje_d3.user.exception.InvalidTokenException;
+import salihkorkmaz.proje_d3.user.exception.NotFoundException;
 import salihkorkmaz.proje_d3.user.exception.NotUniqueEmailException;
 
 
@@ -95,11 +94,11 @@ public class UserController {
         return ResponseEntity.status(400).body(apiError);
     }
 
-    @ExceptionHandler(EntityNotFoundException.class)
-    ResponseEntity<ApiError> handleEntityNotFoundException(EntityNotFoundException exception, HttpServletRequest request){
+    @ExceptionHandler(NotFoundException.class)
+    ResponseEntity<ApiError> handleNotFoundException(NotFoundException exception, HttpServletRequest request){
         ApiError apiError = new ApiError();
         apiError.setPath(request.getRequestURI());
-        apiError.setMessage("Not Found");
+        apiError.setMessage(exception.getMessage());
         apiError.setStatus(404);
         return ResponseEntity.status(404).body(apiError);
     }

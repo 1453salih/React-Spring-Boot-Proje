@@ -16,6 +16,7 @@ import salihkorkmaz.proje_d3.email.EmailService;
 import salihkorkmaz.proje_d3.user.dto.UserDTO;
 import salihkorkmaz.proje_d3.user.exception.ActivationNotificationExcepiton;
 import salihkorkmaz.proje_d3.user.exception.InvalidTokenException;
+import salihkorkmaz.proje_d3.user.exception.NotFoundException;
 import salihkorkmaz.proje_d3.user.exception.NotUniqueEmailException;
 
 
@@ -64,7 +65,7 @@ public class UserService {
     }
 
     public User getUser(long id) {
-        return userRepository.getReferenceById(id);
+        return userRepository.findById(id).orElseThrow(()-> new NotFoundException(id));
     }
 
 }
