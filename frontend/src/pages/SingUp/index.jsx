@@ -1,9 +1,10 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import {singUp} from "./api.js";
-import {Input} from "../SingUp/components/Input.jsx";
+import {Input} from "@/shared/components/Input.jsx";
 import {useTranslation} from "react-i18next";
 import {Alert} from "@/shared/components/Alert.jsx";
 import {Spinner} from "@/shared/components/Spinner.jsx";
+import {Button} from "@/shared/components/Button.jsx";
 
 export function SignUp() {
 
@@ -92,13 +93,12 @@ export function SignUp() {
                             <Alert styleType="danger">{generalError}</Alert>
                         )}
                         <div className="text-center">
-                            <button className="btn btn-primary"
-                                    disabled={!password || password !== passwordRepeat}>
-                                {apiProgress && (
-                                    <Spinner sm/>
-                                )}
-                                {t('signUp')}
-                            </button>
+                            <Button
+                                disabled={!password || password !== passwordRepeat}
+                                apiProgress={apiProgress}
+                            >
+                                {t("signUp")}
+                            </Button>
                         </div>
                     </div>
                 </form>
