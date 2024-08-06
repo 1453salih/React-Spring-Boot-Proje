@@ -39,7 +39,7 @@ export function Login() {
         setApiProgress(true);
         try {
             const response = await login({email,password})
-            dispatch({type:'login-success',data:response.data.user});
+            dispatch({type:'login-success',data:response.data});
             navigate("/")
         } catch (axiosError) {
             if (axiosError.response?.data) { //* Yanıt aldıysak ve data varsa

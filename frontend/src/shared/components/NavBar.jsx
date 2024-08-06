@@ -1,8 +1,7 @@
 import {Link} from "react-router-dom";
 import logo from "@/assets/logo.png";
 import {useTranslation} from "react-i18next";
-import {useContext} from "react";
-import {AuthContext, AuthDispatchContext, useAuthDispatch, useAuthState} from "@/shared/state/context.jsx";
+import {useAuthDispatch, useAuthState} from "@/shared/state/context.jsx";
 
 export function NavBar() {
     const {t} = useTranslation();

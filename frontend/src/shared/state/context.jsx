@@ -1,6 +1,6 @@
-import {createContext, useContext, useEffect, useReducer} from "react";
-import {loadAuthState, storeAuthState} from "@/shared/state/storage.jsx";
-
+import {createContext, useContext, useEffect, useReducer,useState} from "react";
+import {loadAuthState, storeAuthState} from "@/shared/state/storage.js";
+import {setToken} from "@/lib/http.js";
 export const AuthContext = createContext();
 
 export const AuthDispatchContext = createContext();
@@ -16,8 +16,10 @@ export function useAuthDispatch(){
 const authReducer = (authState, action) => {
     switch (action.type) {
         case 'login-success':
-            return action.data
+            setToken(action.data.token);
+            return action.data.user;
         case 'logout-success':
+            setToken();
             return {id: 0}
         default:
             throw new Error(`Unknown action type "${action.type}"`);
@@ -31,7 +33,7 @@ export function AuthenticationContext({children}) {
         storeAuthState(authState);
     }, [authState]);
 
-    // const [auth, setAuth] = useState(loadAuthState());
+    const [auth, setAuth] = useState(loadAuthState());
 
     const onLoginSuccess = (data) => {
         setAuth(data);
