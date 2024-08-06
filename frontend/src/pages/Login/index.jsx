@@ -1,18 +1,21 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import {useTranslation} from "react-i18next";
 import {Alert} from "@/shared/components/Alert.jsx";
-import {Spinner} from "@/shared/components/Spinner.jsx";
 import {Input} from "@/shared/components/Input.jsx";
 import {Button} from "@/shared/components/Button.jsx";
+import {login} from "@/pages/Login/api.js";
+import {AuthContext, useAuthDispatch} from "@/shared/state/context.jsx";
+import {useNavigate} from "react-router-dom";
 
 export function Login() {
-
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [apiProgress, setApiProgress] = useState(false);
     const [errors, setErrors] = useState({});
     const [generalError, setGeneralError] = useState();
-    const {t} = useTranslation()
+    const {t} = useTranslation();
+    const navigate = useNavigate();
+    const dispatch = useAuthDispatch();
 
     //* İnput alanında herhangi bir değişiklik olduğunda hata mesajını sıfırlar
     useEffect(() => {
@@ -32,28 +35,24 @@ export function Login() {
 
     const onSubmit = async (event) => {
         event.preventDefault();
-        setApiProgress(true);
         setGeneralError();
-        setSuccessMessage();
+        setApiProgress(true);
         try {
-            // const response = await singUp({
-            //     username,
-            //     email,
-            //     password
-            // })
-            // setSuccessMessage(response.data.message)
+            const response = await login({email,password})
+            dispatch({type:'login-success',data:response.data.user});
+            navigate("/")
         } catch (axiosError) {
-            // if (axiosError.response?.data) { //* Yanıt aldıysak ve data varsa
-            //     if (axiosError.response.data.status === 400) {              //* 400 cevanı aldıysak ValidationsError
-            //         setErrors(axiosError.response.data.validationErrors);
-            //     } else {
-            //         setGeneralError(axiosError.response.data.message);
-            //     }
-            // } else {
-            //     setGeneralError(t('genericError'));
-            // }
+            if (axiosError.response?.data) { //* Yanıt aldıysak ve data varsa
+                if (axiosError.response.data.status === 400) {              //* 400 cevanı aldıysak ValidationsError
+                    setErrors(axiosError.response.data.validationErrors);
+                } else {
+                    setGeneralError(axiosError.response.data.message);
+                }
+            } else {
+                setGeneralError(t("genericError"));
+            }
         } finally {
-            // setApiProgress(false)
+            setApiProgress(false)
         }
     };
 

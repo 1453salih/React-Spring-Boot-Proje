@@ -2,7 +2,7 @@ import {getUser} from "./api";
 import {Alert} from "@/shared/components/Alert";
 import {Spinner} from "@/shared/components/Spinner";
 import {useRouteParamApiRequest} from "@/shared/hooks/useRouteParamApiRequest";
-import {ProfileCard} from "@/pages/User/components/PofileCard.jsx";
+import {ProfileCard} from "@/pages/User/components/ProfileCard/index.jsx";
 
 export function User() {
     const {
