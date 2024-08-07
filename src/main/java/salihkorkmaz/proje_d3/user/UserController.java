@@ -13,7 +13,8 @@ import salihkorkmaz.proje_d3.shared.GenericMessage;
 import salihkorkmaz.proje_d3.shared.Messages;
 import salihkorkmaz.proje_d3.user.dto.UserCreate;
 import salihkorkmaz.proje_d3.user.dto.UserDTO;
-
+import salihkorkmaz.proje_d3.user.dto.UserUpdate;
+import salihkorkmaz.proje_d3.user.exception.AuthorizationException;
 
 
 @RestController
@@ -47,6 +48,14 @@ public class UserController {
     @GetMapping("/api/v1/users/{id}")
     UserDTO getUserById(@PathVariable long id){
         return new UserDTO(userService.getUser(id));
+    }
+    @PutMapping("/api/v1/users/{id}")
+    UserDTO updateUser(@PathVariable long id,@Valid @RequestBody UserUpdate userUpdate,@RequestHeader(name = "Authorization",required = false)String authorizationHeader){
+        var loggedInUser = tokenService.verifyToken(authorizationHeader);
+        if(loggedInUser == null || loggedInUser.getId() != id){
+            throw new AuthorizationException();
+        }
+        return new UserDTO(userService.updateUser(id,userUpdate));
     }
 
 }

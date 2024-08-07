@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import salihkorkmaz.proje_d3.email.EmailService;
 import salihkorkmaz.proje_d3.user.dto.UserDTO;
+import salihkorkmaz.proje_d3.user.dto.UserUpdate;
 import salihkorkmaz.proje_d3.user.exception.ActivationNotificationExcepiton;
 import salihkorkmaz.proje_d3.user.exception.InvalidTokenException;
 import salihkorkmaz.proje_d3.user.exception.NotFoundException;
@@ -73,5 +74,11 @@ public class UserService {
 
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    public User updateUser(long id, UserUpdate userUpdate) {
+        User inDB = getUser(id);
+        inDB.setUsername(userUpdate.username());
+        return userRepository.save(inDB);
     }
 }

@@ -29,7 +29,7 @@ export function ProfileCard({user}) {
             setApiProgress(false);
         }
     }
-    const isEditButtonVisible = !editMode && authState.id === user.id
+    const isEditButtonVisible = true
     return (
         <div className="card">
             <div className="card-header text-center">
