@@ -7,7 +7,8 @@ import org.springframework.data.domain.Pageable;
 
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.validation.Valid; 
+import jakarta.validation.Valid;
+import salihkorkmaz.proje_d3.auth.token.TokenService;
 import salihkorkmaz.proje_d3.shared.GenericMessage;
 import salihkorkmaz.proje_d3.shared.Messages;
 import salihkorkmaz.proje_d3.user.dto.UserCreate;
@@ -20,6 +21,9 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    TokenService tokenService;
 
     @PostMapping("/api/v1/users")
     GenericMessage createUser(@Valid @RequestBody UserCreate user){
@@ -35,8 +39,9 @@ public class UserController {
     }
 
     @GetMapping("/api/v1/users")
-    Page<UserDTO> getAllUsers(Pageable page){
-        return userService.getUsers(page).map(UserDTO::new);
+    Page<UserDTO> getAllUsers(Pageable page,@RequestHeader(name = "Authorization",required = false)String authorizationHeader ){
+        var loggedInUser = tokenService.verifyToken(authorizationHeader);
+        return userService.getUsers(page,loggedInUser).map(UserDTO::new);
     }
 
     @GetMapping("/api/v1/users/{id}")
